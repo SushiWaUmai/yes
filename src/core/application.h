@@ -6,9 +6,10 @@ namespace yes
     class Application
     {
     public:
-        void Init();
+        virtual void Init();
         void Run();
-        void Terminate();
+        virtual void Update();
+        virtual void Terminate();
 
     private:
         Window window;

@@ -18,8 +18,13 @@ namespace yes
     {
         while (!window.shouldClose())
         {
-            window.Run();
+            Update();
         }
+    }
+
+    void Application::Update()
+    {
+        window.Run();
     }
 
     void Application::Terminate()
