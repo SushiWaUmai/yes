@@ -8,6 +8,8 @@ namespace yes
 {
     void Shader::Init(const char *vertPath, const char *fragPath)
     {
+        id = glCreateProgram();
+        
         GLuint vertID = glCreateShader(GL_VERTEX_SHADER);
         Compile(vertID, vertPath);
         GLuint fragID = glCreateShader(GL_FRAGMENT_SHADER);

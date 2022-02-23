@@ -5,6 +5,7 @@ namespace yes
     void Buffer::Init(GLenum target, GLsizeiptr size, const void *data, GLenum usage)
     {
         glGenBuffers(1, &id);
+        this->target = target;
 
         Bind();
         glBufferData(target, size, data, usage);

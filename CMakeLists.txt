@@ -11,6 +11,10 @@ add_library(${PROJECT_NAME} STATIC
     "src/core/application.cpp"
     "src/core/window.h"
     "src/core/window.cpp"
+    "src/core/graphics/buffer.h"
+    "src/core/graphics/buffer.cpp"
+    "src/core/graphics/shader.h"
+    "src/core/graphics/shader.cpp"
     "src/utils/fileloader.h"
     "src/utils/fileloader.cpp"
 )
