@@ -2,7 +2,7 @@
 #include <glad/glad.h>
 
 #include "shader.h"
-#include "../../utils/fileloader.h"
+#include "../utils/fileloader.h"
 
 namespace yes
 {
