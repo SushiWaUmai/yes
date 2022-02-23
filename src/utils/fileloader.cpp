@@ -24,4 +24,4 @@ namespace yes
 
         return data;
     }
-} // namespace yes
+}

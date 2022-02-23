@@ -2,7 +2,7 @@
 #include <glad/glad.h>
 
 #include "shader.h"
-#include "../fileloader.h"
+#include "../../utils/fileloader.h"
 
 namespace yes
 {
@@ -66,7 +66,10 @@ namespace yes
 
             std::cout << "Failed to link shader program" << std::endl << message << std::endl;
             free(message);
+            return false;
         }
+        
+        return true;
     }
 
     void Shader::Use() const
@@ -78,4 +81,4 @@ namespace yes
     {
         glUseProgram(0);
     }
-} // namespace yes
+}

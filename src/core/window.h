@@ -18,4 +18,4 @@ namespace yes
     private:
         GLFWwindow *window;
     };
-} // namespace yes
+}

@@ -15,6 +15,7 @@ namespace yes
 
     private:
         GLuint id;
+        GLuint target;
     };
 
-} // namespace yes
+}

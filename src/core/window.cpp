@@ -18,4 +18,4 @@ namespace yes
     {
         glfwDestroyWindow(window);
     }
-} // namespace yes
+}

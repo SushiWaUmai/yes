@@ -14,4 +14,4 @@ namespace yes
     private:
         Window window;
     };
-} // namespace yes
+}

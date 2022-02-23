@@ -31,4 +31,4 @@ namespace yes
     {
         glfwTerminate();
     }
-} // namespace yes
+}

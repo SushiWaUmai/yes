@@ -11,14 +11,14 @@ namespace yes
         Unbind();
     }
 
-    void Buffer::Bind()
+    void Buffer::Bind() const
     {
         glBindBuffer(target, id);
     }
 
-    void Buffer::Unbind()
+    void Buffer::Unbind() const
     {
         glBindBuffer(target, 0);
     }
 
-} // namespace yes
+}

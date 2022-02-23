@@ -1,4 +1,5 @@
 #pragma once
+#include <glad/glad.h>
 
 namespace yes
 {
@@ -18,4 +19,4 @@ namespace yes
         bool Compile(GLuint &shader, const char *path);
         bool Link(GLuint vertID, GLuint fragID);
     };
-} // namespace yes
+}
