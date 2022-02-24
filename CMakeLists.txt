@@ -16,6 +16,8 @@ add_library(${PROJECT_NAME} STATIC
     "src/graphics/buffer/indexbuffer.cpp"
     "src/graphics/buffer/vertexbuffer.h"
     "src/graphics/buffer/vertexbuffer.cpp"
+    "src/graphics/buffer/vertexarray.h"
+    "src/graphics/buffer/vertexarray.cpp"
     "src/graphics/shader.h"
     "src/graphics/shader.cpp"
     "src/utils/fileloader.h"
