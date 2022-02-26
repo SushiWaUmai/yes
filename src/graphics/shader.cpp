@@ -19,6 +19,7 @@ namespace yes
         GLuint fragID = glCreateShader(GL_FRAGMENT_SHADER);
         Compile(fragID, fragPath);
         Link(vertID, fragID);
+        Use();
     }
 
     bool Shader::Compile(GLuint &shaderID, const char *path)

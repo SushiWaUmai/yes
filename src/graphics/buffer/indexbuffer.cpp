@@ -15,7 +15,6 @@ namespace yes
 
         Bind();
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, usage);
-        Unbind();
     }
 
     void IndexBuffer::Bind() const

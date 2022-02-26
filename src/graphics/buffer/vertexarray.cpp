@@ -12,6 +12,7 @@ namespace yes
     void VertexArray::Init()
     {
         glGenVertexArrays(1, &id);
+        Bind();
     }
 
     void VertexArray::Bind() const
