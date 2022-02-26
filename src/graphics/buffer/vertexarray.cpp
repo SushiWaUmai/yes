@@ -1,4 +1,5 @@
-#include "yes/yes.h"
+#include "../../core.h"
+
 namespace yes
 {
     Ref<VertexArray> VertexArray::Create()
@@ -21,5 +22,15 @@ namespace yes
     void VertexArray::Unbind() const
     {
         glBindVertexArray(0);
+    }
+    
+    void VertexArray::AddVertexBuffer(Ref<VertexBuffer> vertexBuffer)
+    {
+        vertexBuffers.push_back(vertexBuffer);
+    }
+
+    void VertexArray::SetIndexBuffer(Ref<IndexBuffer> indexBuffer)
+    {
+        this->indexBuffer = indexBuffer;
     }
 }

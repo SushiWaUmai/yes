@@ -1,4 +1,4 @@
-#include "yes/yes.h"
+#include "../core.h"
 
 namespace yes
 {

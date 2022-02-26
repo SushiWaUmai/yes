@@ -8,6 +8,7 @@ add_subdirectory("./deps/glm/")
 
 add_library(${PROJECT_NAME} STATIC
     "include/yes/yes.h"
+    "src/core.h"
     "src/core/base.h"
     "src/core/application.h"
     "src/core/application.cpp"
