@@ -1,8 +1,14 @@
 #pragma once
 
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+
+#include <glad/glad.h>
+#include <iostream>
+
 #include "../../src/core/base.h"
-#include "../../src/core/application.h"
 #include "../../src/core/window.h"
+#include "../../src/core/application.h"
 
 #include "../../src/graphics/buffer/buffer.h"
 #include "../../src/graphics/buffer/vertexbuffer.h"

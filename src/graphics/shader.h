@@ -1,12 +1,11 @@
 #pragma once
-#include <glad/glad.h>
 
 namespace yes
 {
     class Shader
     {
     public:
-        void Init(const char *vertPath, const char *fragPath);
+        static Ref<Shader> Create(const char *vertPath, const char * fragPath);
 
         void Use() const;
         void Unuse() const;
@@ -15,6 +14,7 @@ namespace yes
 
     private:
         GLuint id;
+        void Init(const char *vertPath, const char *fragPath);
 
         bool Compile(GLuint &shader, const char *path);
         bool Link(GLuint vertID, GLuint fragID);

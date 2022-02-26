@@ -1,8 +1,14 @@
-#include <glad/glad.h>
-#include "indexbuffer.h"
+#include "yes/yes.h"
 
 namespace yes
 {
+    Ref<IndexBuffer> IndexBuffer::Create(GLsizeiptr size, const void *data, GLenum usage)
+    {
+        Ref<IndexBuffer> result = CreateRef<IndexBuffer>();
+        result->Init(size, data, usage);
+        return result;
+    }
+
     void IndexBuffer::Init(GLsizeiptr size, const void *data, GLenum usage)
     {
         glGenBuffers(1, &id);

@@ -7,6 +7,7 @@ add_subdirectory("./deps/glfw/")
 
 add_library(${PROJECT_NAME} STATIC
     "include/yes/yes.h"
+    "src/core/base.h"
     "src/core/application.h"
     "src/core/application.cpp"
     "src/core/window.h"
@@ -25,5 +26,11 @@ add_library(${PROJECT_NAME} STATIC
 )
 
 target_compile_options(${PROJECT_NAME} INTERFACE "-lglad" PRIVATE "-lglfw3")
-target_include_directories(${PROJECT_NAME} PRIVATE "./deps/glfw/include/" PRIVATE "./deps/glad/include" INTERFACE "./include/")
+target_include_directories(${PROJECT_NAME}
+    PRIVATE "./deps/glfw/include/"
+    PRIVATE "./deps/glad/include/"
+    PRIVATE "./src/"
+    PUBLIC "./include/"
+)
+
 target_link_libraries(${PROJECT_NAME} PUBLIC "glad" "glfw")

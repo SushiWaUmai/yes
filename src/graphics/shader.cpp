@@ -1,11 +1,14 @@
-#include <iostream>
-#include <glad/glad.h>
-
-#include "shader.h"
-#include "../utils/fileloader.h"
+#include "yes/yes.h"
 
 namespace yes
 {
+    Ref<Shader> Shader::Create(const char *vertPath, const char *fragPath)
+    {
+        Ref<Shader> result = CreateRef<Shader>();
+        result->Init(vertPath, fragPath);
+        return result;
+    }
+
     void Shader::Init(const char *vertPath, const char *fragPath)
     {
         id = glCreateProgram();
@@ -14,7 +17,6 @@ namespace yes
         Compile(vertID, vertPath);
         GLuint fragID = glCreateShader(GL_FRAGMENT_SHADER);
         Compile(fragID, fragPath);
-
         Link(vertID, fragID);
     }
 

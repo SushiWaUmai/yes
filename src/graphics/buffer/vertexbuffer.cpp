@@ -1,9 +1,14 @@
-#include <glad/glad.h>
+#include "yes/yes.h"
 
-#include "vertexbuffer.h"
+namespace yes
+{
+    Ref<VertexBuffer> VertexBuffer::Create(GLsizeiptr size, const void *data, GLenum usage)
+    {
+        Ref<VertexBuffer> result = CreateRef<VertexBuffer>();
+        result->Init(size, data, usage);
+        return result;
+    }
 
-namespace yes {
-    
     void VertexBuffer::Init(GLsizeiptr size, const void *data, GLenum usage)
     {
         glGenBuffers(1, &id);
@@ -13,11 +18,13 @@ namespace yes {
         Unbind();
     }
 
-    void VertexBuffer::Bind() const {
+    void VertexBuffer::Bind() const
+    {
         glBindBuffer(GL_ARRAY_BUFFER, id);
     }
 
-    void VertexBuffer::Unbind() const {
+    void VertexBuffer::Unbind() const
+    {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 }

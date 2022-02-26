@@ -1,4 +1,4 @@
-#include "window.h"
+#include "yes/yes.h"
 
 namespace yes
 {
