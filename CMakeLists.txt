@@ -4,6 +4,7 @@ project(yes CXX)
 
 add_subdirectory("./deps/glad/")
 add_subdirectory("./deps/glfw/")
+add_subdirectory("./deps/glm/")
 
 add_library(${PROJECT_NAME} STATIC
     "include/yes/yes.h"
@@ -19,6 +20,8 @@ add_library(${PROJECT_NAME} STATIC
     "src/graphics/buffer/vertexbuffer.cpp"
     "src/graphics/buffer/vertexarray.h"
     "src/graphics/buffer/vertexarray.cpp"
+    "src/graphics/shadertypes.h"
+    "src/graphics/shadertypes.cpp"
     "src/graphics/shader.h"
     "src/graphics/shader.cpp"
     "src/utils/fileloader.h"
@@ -33,4 +36,4 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC "./include/"
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC "glad" "glfw")
+target_link_libraries(${PROJECT_NAME} PUBLIC "glad" "glfw" "glm")
