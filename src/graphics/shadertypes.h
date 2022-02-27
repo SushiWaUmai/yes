@@ -22,5 +22,6 @@ namespace yes
     {
         GLsizei ShaderDataTypeToSize(ShaderDataType type);
         GLenum ShaderDataTypeToGLType(ShaderDataType type);
+        GLuint ShaderDataTypeToComponentCount(ShaderDataType type);
     }
 }

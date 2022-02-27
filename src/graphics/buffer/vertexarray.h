@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <unordered_map>
 
 namespace yes {
     class VertexArray {
@@ -10,11 +11,14 @@ namespace yes {
         void Bind() const;
         void Unbind() const;
 
-        void AddVertexBuffer(Ref<VertexBuffer> vertexBuffer);
+        void AddVertexBuffer(GLuint index, Ref<VertexBuffer> vertexBuffer);
         void SetIndexBuffer(Ref<IndexBuffer> indexBuffer);
+        
+        void EnableVertexAttribute(GLuint index);
+        void EnableAllVertexAttributes();
     private:
         GLuint id;
-        std::vector<Ref<VertexBuffer>> vertexBuffers;
+        std::unordered_map<GLuint, Ref<VertexBuffer>> vertexBuffers;
         Ref<IndexBuffer> indexBuffer;
     };
 }

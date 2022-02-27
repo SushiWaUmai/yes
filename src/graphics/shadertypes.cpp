@@ -70,5 +70,38 @@ namespace yes
 
             return GL_NONE;
         }
+
+        GLuint ShaderDataTypeToComponentCount(ShaderDataType type)
+        {
+            switch (type)
+            {
+            case ShaderDataType::None:
+                return 0;
+            case ShaderDataType::Float:
+                return 1;
+            case ShaderDataType::Vec2:
+                return 2;
+            case ShaderDataType::Vec3:
+                return 3;
+            case ShaderDataType::Vec4:
+                return 4;
+            case ShaderDataType::Mat3:
+                return 9;
+            case ShaderDataType::Mat4:
+                return 16;
+            case ShaderDataType::Int:
+                return 1;
+            case ShaderDataType::Int2:
+                return 2;
+            case ShaderDataType::Int3:
+                return 3;
+            case ShaderDataType::Int4:
+                return 4;
+            case ShaderDataType::Bool:
+                return 1;
+            }
+
+            return 0;
+        }
     }
 }

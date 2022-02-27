@@ -2,19 +2,21 @@
 
 namespace yes
 {
-    Ref<IndexBuffer> IndexBuffer::Create(GLsizeiptr size, const void *data, GLenum usage)
+    Ref<IndexBuffer> IndexBuffer::Create(GLuint count, ShaderDataType type, const void *data, GLenum usage)
     {
         Ref<IndexBuffer> result = CreateRef<IndexBuffer>();
-        result->Init(size, data, usage);
+        result->Init(count, type, data, usage);
         return result;
     }
 
-    void IndexBuffer::Init(GLsizeiptr size, const void *data, GLenum usage)
+    void IndexBuffer::Init(GLuint count, ShaderDataType type, const void *data, GLenum usage)
     {
         glGenBuffers(1, &id);
+        this->count = count;
+        this->dataType = type;
 
         Bind();
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, usage);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * ShaderDataTypeUtils::ShaderDataTypeToSize(type), data, usage);
     }
 
     void IndexBuffer::Bind() const

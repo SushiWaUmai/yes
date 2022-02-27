@@ -10,11 +10,11 @@
 #include "core/window.h"
 #include "core/application.h"
 
+#include "graphics/shadertypes.h"
 #include "graphics/buffer/buffer.h"
 #include "graphics/buffer/vertexbuffer.h"
 #include "graphics/buffer/indexbuffer.h"
 #include "graphics/buffer/vertexarray.h"
-#include "graphics/shadertypes.h"
 #include "graphics/shader.h"
 
 #include "utils/fileloader.h"
