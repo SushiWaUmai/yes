@@ -5,17 +5,22 @@ namespace yes
     enum ShaderDataType
     {
         None = 0,
-        Float,
-        Vec2,
-        Vec3,
-        Vec4,
-        Mat3,
-        Mat4,
-        Int,
-        Int2,
-        Int3,
-        Int4,
+        V1F,
+        V2F,
+        V3F,
+        V4F,
+        V1I,
+        V2I,
+        V3I,
+        V4I,
+        V1U,
+        V2U,
+        V3U,
+        V4U,
+        M3F,
+        M4F,
         Bool,
+        SHADER_DATA_TYPE_COUNT
     };
 
     namespace ShaderDataTypeUtils
