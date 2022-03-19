@@ -43,7 +43,7 @@ namespace yes
             case ShaderDataType::M4F:
 
                 return sizeof(glm::mat4);
-            case ShaderDataType::Bool:
+            case ShaderDataType::BOOL:
                 return sizeof(bool);
             }
 
@@ -89,7 +89,7 @@ namespace yes
             case ShaderDataType::M4F:
                 return GL_FLOAT;
 
-            case ShaderDataType::Bool:
+            case ShaderDataType::BOOL:
                 return GL_BOOL;
             }
 
@@ -135,7 +135,7 @@ namespace yes
             case ShaderDataType::M4F:
                 return 16;
 
-            case ShaderDataType::Bool:
+            case ShaderDataType::BOOL:
                 return 1;
             }
 

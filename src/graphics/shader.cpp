@@ -13,7 +13,7 @@ namespace yes
     void Shader::Init(const char *vertPath, const char *fragPath)
     {
         id = glCreateProgram();
-        
+
         GLuint vertID = glCreateShader(GL_VERTEX_SHADER);
         Compile(vertID, vertPath);
         GLuint fragID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -26,7 +26,7 @@ namespace yes
     {
         const char *source = load_file(path);
 
-        if(!source)
+        if (!source)
         {
             std::cout << "Failed to load shader: " << path << std::endl;
             return false;
@@ -45,7 +45,8 @@ namespace yes
             char *message = (char *)malloc(length * sizeof(char));
             glGetShaderInfoLog(shaderID, length, &length, message);
 
-            std::cout << "Failed to compile vertex shader" << std::endl << message << std::endl;
+            std::cout << "Failed to compile vertex shader" << std::endl
+                      << message << std::endl;
             free(message);
             return false;
         }
@@ -70,11 +71,12 @@ namespace yes
             char *message = (char *)malloc(length * sizeof(char));
             glGetProgramInfoLog(id, length, &length, message);
 
-            std::cout << "Failed to link shader program" << std::endl << message << std::endl;
+            std::cout << "Failed to link shader program" << std::endl
+                      << message << std::endl;
             free(message);
             return false;
         }
-        
+
         return true;
     }
 
@@ -87,4 +89,26 @@ namespace yes
     {
         glUseProgram(0);
     }
+
+    GLint Shader::GetUniformLocation(const char *name)
+    {
+        Use();
+        return glGetUniformLocation(id, name);
+    }
+    
+    void Shader::SetUniformV1F(const char *name, float value) { glUniform1f(GetUniformLocation(name), value); }
+    void Shader::SetUniformV2F(const char *name, glm::vec2 value) { glUniform2fv(GetUniformLocation(name), 1, &value[0]); }
+    void Shader::SetUniformV3F(const char *name, glm::vec3 value) { glUniform3fv(GetUniformLocation(name), 1, &value[0]); }
+    void Shader::SetUniformV4F(const char *name, glm::vec4 value) { glUniform4fv(GetUniformLocation(name), 1, &value[0]); }
+    void Shader::SetUniformV1I(const char *name, int value) { glUniform1i(GetUniformLocation(name), value); }
+    void Shader::SetUniformV2I(const char *name, glm::ivec2 value) { glUniform2iv(GetUniformLocation(name), 1, &value[0]); }
+    void Shader::SetUniformV3I(const char *name, glm::ivec3 value) { glUniform3iv(GetUniformLocation(name), 1, &value[0]); }
+    void Shader::SetUniformV4I(const char *name, glm::ivec4 value) { glUniform4iv(GetUniformLocation(name), 1, &value[0]); }
+    void Shader::SetUniformV1U(const char *name, unsigned int value) { glUniform1ui(GetUniformLocation(name), value); }
+    void Shader::SetUniformV2U(const char *name, glm::uvec2 value) { glUniform2uiv(GetUniformLocation(name), 1, &value[0]); }
+    void Shader::SetUniformV3U(const char *name, glm::uvec3 value) { glUniform3uiv(GetUniformLocation(name), 1, &value[0]); }
+    void Shader::SetUniformV4U(const char *name, glm::uvec4 value) { glUniform4uiv(GetUniformLocation(name), 1, &value[0]); }
+    void Shader::SetUniformM3F(const char *name, glm::mat3 value) { glUniformMatrix3fv(GetUniformLocation(name), 1, GL_FALSE, &value[0][0]); }
+    void Shader::SetUniformM4F(const char *name, glm::mat4 value) { glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &value[0][0]); }
+    void Shader::SetUniformBOOL(const char *name, bool value) { glUniform1i(GetUniformLocation(name), (int)value); }
 }

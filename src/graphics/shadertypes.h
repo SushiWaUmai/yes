@@ -19,7 +19,7 @@ namespace yes
         V4U,
         M3F,
         M4F,
-        Bool,
+        BOOL,
         SHADER_DATA_TYPE_COUNT
     };
 
