@@ -10,7 +10,8 @@ namespace yes
         virtual void Update();
         virtual void Terminate();
 
-    private:
+    protected:
         Window window;
+        Renderer renderer;
     };
 }

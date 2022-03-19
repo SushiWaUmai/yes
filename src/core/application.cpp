@@ -4,10 +4,8 @@ namespace yes
 {
     void Application::Init()
     {
-        glfwInit();
         window.Init("Hello World", 800, 600);
-
-        gladLoadGL();
+        renderer.Init();
     }
 
     void Application::Run()

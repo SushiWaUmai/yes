@@ -2,14 +2,14 @@
 
 namespace yes
 {
-    Ref<IndexBuffer> IndexBuffer::Create(GLuint count, ShaderDataType type, const void *data, GLenum usage)
+    Ref<IndexBuffer> IndexBuffer::Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
     {
         Ref<IndexBuffer> result = CreateRef<IndexBuffer>();
         result->Init(count, type, data, usage);
         return result;
     }
 
-    void IndexBuffer::Init(GLuint count, ShaderDataType type, const void *data, GLenum usage)
+    void IndexBuffer::Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
     {
         glGenBuffers(1, &id);
         this->count = count;

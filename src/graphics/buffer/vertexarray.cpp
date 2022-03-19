@@ -1,4 +1,4 @@
-#include "../../core.h"
+#include "core.h"
 #include <iostream>
 
 namespace yes
@@ -61,5 +61,4 @@ namespace yes
             EnableVertexAttribute(vertexBuffer.first);
         }
     }
-
 }

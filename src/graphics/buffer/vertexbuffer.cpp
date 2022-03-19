@@ -2,14 +2,14 @@
 
 namespace yes
 {
-    Ref<VertexBuffer> VertexBuffer::Create(GLuint count, ShaderDataType type, const void *data, GLenum usage)
+    Ref<VertexBuffer> VertexBuffer::Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
     {
         Ref<VertexBuffer> result = CreateRef<VertexBuffer>();
         result->Init(count, type, data, usage);
         return result;
     }
 
-    void VertexBuffer::Init(GLuint count, ShaderDataType type, const void *data, GLenum usage)
+    void VertexBuffer::Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
     {
         glGenBuffers(1, &id);
         this->count = count;

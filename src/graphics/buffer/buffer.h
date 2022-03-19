@@ -6,7 +6,7 @@ namespace yes
     class Buffer
     {
     public:
-        virtual void Init(GLuint count, ShaderDataType type, const void *data, GLenum usage) = 0;
+        virtual void Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage) = 0;
 
         virtual void Bind() const = 0;
         virtual void Unbind() const = 0;
@@ -17,7 +17,7 @@ namespace yes
 
     protected:
         GLuint id;
-        GLuint count;
+        GLsizei count;
         ShaderDataType dataType;
     };
 

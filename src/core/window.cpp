@@ -4,6 +4,7 @@ namespace yes
 {
     void Window::Init(const char *title, int width, int height)
     {
+        glfwInit();
         window = glfwCreateWindow(width, height, title, NULL, NULL);
         glfwMakeContextCurrent(window);
     }
