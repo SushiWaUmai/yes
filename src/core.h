@@ -8,14 +8,14 @@
 
 #include "core/base.h"
 
+#include "graphics/texture.h"
 #include "graphics/shadertypes.h"
-#include "graphics/buffer/buffer.h"
 #include "graphics/buffer/vertexbuffer.h"
 #include "graphics/buffer/indexbuffer.h"
 #include "graphics/buffer/vertexarray.h"
 #include "graphics/shader.h"
 #include "graphics/renderer.h"
-#include "graphics/texture.h"
+#include "graphics/buffer/framebuffer.h"
 
 #include "utils/fileloader.h"
 

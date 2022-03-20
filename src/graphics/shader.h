@@ -38,4 +38,4 @@ namespace yes
 
         GLint GetUniformLocation(const char *name);
     };
-}
+} // namespace yes
