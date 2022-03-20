@@ -2,16 +2,29 @@
 
 namespace yes
 {
+    FrameBuffer::FrameBuffer()
+    {
+        Init();
+    }
+
+    FrameBuffer::~FrameBuffer()
+    {
+        Delete();
+    }
+
     Ref<FrameBuffer> FrameBuffer::Create()
     {
-        Ref<FrameBuffer> result = CreateRef<FrameBuffer>();
-        result->Init();
-        return result;
+        return CreateRef<FrameBuffer>();
     }
 
     void FrameBuffer::Init()
     {
         glGenFramebuffers(1, &id);
+    }
+
+    void FrameBuffer::Delete() const
+    {
+        glDeleteFramebuffers(1, &id);
     }
 
     void FrameBuffer::Bind() const

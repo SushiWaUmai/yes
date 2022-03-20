@@ -7,11 +7,19 @@
 
 namespace yes
 {
+    Texture::Texture(const char *path)
+    {
+        Init(path);
+    }
+
+    Texture::~Texture()
+    {
+        Delete();
+    }
+
     Ref<Texture> Texture::Create(const char *path)
     {
-        Ref<Texture> result = CreateRef<Texture>();
-        result->Init(path);
-        return result;
+        return CreateRef<Texture>(path);
     }
 
     void Texture::Init(const char *path)
@@ -32,6 +40,11 @@ namespace yes
 
         // Free the image
         stbi_image_free(data);
+    }
+
+    void Texture::Delete() const
+    {
+        glDeleteTextures(1, &id);
     }
 
     void Texture::Bind() const

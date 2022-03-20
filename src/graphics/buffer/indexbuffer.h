@@ -5,9 +5,15 @@ namespace yes
     class IndexBuffer
     {
     public:
+        IndexBuffer() = default;
+        IndexBuffer(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
+        ~IndexBuffer();
+
         static Ref<IndexBuffer> Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
 
         void Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
+        void Delete() const;
+
         void Bind() const;
         void Unbind() const;
 

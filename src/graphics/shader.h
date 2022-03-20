@@ -6,7 +6,14 @@ namespace yes
     class Shader
     {
     public:
+        Shader() = default;
+        Shader(const char *vertPath, const char *fragPath);
+        ~Shader();
+
         static Ref<Shader> Create(const char *vertPath, const char * fragPath);
+
+        void Init(const char *vertPath, const char *fragPath);
+        void Delete() const;
 
         void Use() const;
         void Unuse() const;
@@ -31,7 +38,6 @@ namespace yes
         inline GLuint GetID() const { return id; }
     private:
         GLuint id;
-        void Init(const char *vertPath, const char *fragPath);
 
         bool Compile(GLuint &shader, const char *path);
         bool Link(GLuint vertID, GLuint fragID);

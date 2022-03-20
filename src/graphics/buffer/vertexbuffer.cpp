@@ -2,11 +2,19 @@
 
 namespace yes
 {
+    VertexBuffer::VertexBuffer(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
+    {
+        Init(count, type, data, usage);
+    }
+
+    VertexBuffer::~VertexBuffer()
+    {
+        Delete();
+    }
+
     Ref<VertexBuffer> VertexBuffer::Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
     {
-        Ref<VertexBuffer> result = CreateRef<VertexBuffer>();
-        result->Init(count, type, data, usage);
-        return result;
+        return CreateRef<VertexBuffer>(count, type, data, usage);
     }
 
     void VertexBuffer::Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
@@ -17,6 +25,11 @@ namespace yes
 
         Bind();
         glBufferData(GL_ARRAY_BUFFER, count * ShaderDataTypeUtils::ShaderDataTypeToSize(type), data, usage);
+    }
+
+    void VertexBuffer::Delete() const
+    {
+        glDeleteBuffers(1, &id);
     }
 
     void VertexBuffer::Bind() const

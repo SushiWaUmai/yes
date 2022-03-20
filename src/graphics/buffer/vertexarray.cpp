@@ -3,17 +3,30 @@
 
 namespace yes
 {
-    Ref<VertexArray> VertexArray::Create()
+    VertexArray::VertexArray()
     {
-        Ref<VertexArray> result = CreateRef<VertexArray>();
-        result->Init();
-        return result;
+        Init();
     }
 
+    VertexArray::~VertexArray()
+    {
+        Delete();
+    }
+
+    Ref<VertexArray> VertexArray::Create()
+    {
+        return CreateRef<VertexArray>();
+    }
+    
     void VertexArray::Init()
     {
         glGenVertexArrays(1, &id);
         Bind();
+    }
+
+    void VertexArray::Delete() const
+    {
+        glDeleteVertexArrays(1, &id);
     }
 
     void VertexArray::Bind() const

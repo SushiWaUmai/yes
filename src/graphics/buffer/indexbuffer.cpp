@@ -2,11 +2,19 @@
 
 namespace yes
 {
+    IndexBuffer::IndexBuffer(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
+    {
+        Init(count, type, data, usage);
+    }
+
+    IndexBuffer::~IndexBuffer()
+    {
+        Delete();
+    }
+
     Ref<IndexBuffer> IndexBuffer::Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
     {
-        Ref<IndexBuffer> result = CreateRef<IndexBuffer>();
-        result->Init(count, type, data, usage);
-        return result;
+        return CreateRef<IndexBuffer>(count, type, data, usage);
     }
 
     void IndexBuffer::Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
@@ -17,6 +25,11 @@ namespace yes
 
         Bind();
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * ShaderDataTypeUtils::ShaderDataTypeToSize(type), data, usage);
+    }
+
+    void IndexBuffer::Delete() const
+    {
+        glDeleteBuffers(1, &id);
     }
 
     void IndexBuffer::Bind() const

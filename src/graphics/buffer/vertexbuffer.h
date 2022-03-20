@@ -5,9 +5,15 @@ namespace yes
     class VertexBuffer
     {
     public:
+        VertexBuffer() = default;
+        VertexBuffer(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
+        ~VertexBuffer();
+
         static Ref<VertexBuffer> Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
         
         void Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
+        void Delete() const;
+
         void Bind() const;
         void Unbind() const;
 

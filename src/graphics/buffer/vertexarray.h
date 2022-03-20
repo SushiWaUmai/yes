@@ -6,9 +6,14 @@ namespace yes
     class VertexArray
     {
     public:
+        VertexArray();
+        ~VertexArray();
+
         static Ref<VertexArray> Create();
 
         void Init();
+        void Delete() const;
+
         void Bind() const;
         void Unbind() const;
 
