@@ -15,6 +15,7 @@
 #include "graphics/buffer/vertexarray.h"
 #include "graphics/shader.h"
 #include "graphics/renderer.h"
+#include "graphics/texture.h"
 
 #include "utils/fileloader.h"
 

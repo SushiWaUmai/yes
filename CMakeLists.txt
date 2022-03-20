@@ -27,6 +27,8 @@ add_library(${PROJECT_NAME} STATIC
     "src/graphics/shader.cpp"
     "src/graphics/renderer.h"
     "src/graphics/renderer.cpp"
+    "src/graphics/texture.h"
+    "src/graphics/texture.cpp"
     "src/utils/fileloader.h"
     "src/utils/fileloader.cpp"
 )
@@ -35,8 +37,9 @@ target_compile_options(${PROJECT_NAME} INTERFACE "-lglad" PRIVATE "-lglfw3")
 target_include_directories(${PROJECT_NAME}
     PRIVATE "./deps/glfw/include/"
     PRIVATE "./deps/glad/include/"
+    PRIVATE "./deps/stb/"
     PRIVATE "./src/"
-    PUBLIC "./include/"
+    PUBLIC  "./include/"
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC "glad" "glfw" "glm")
