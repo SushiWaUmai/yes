@@ -11,6 +11,8 @@ namespace yes
         virtual void Terminate();
 
     protected:
+        ~Application(); 
+
         Window window;
         Renderer renderer;
     };

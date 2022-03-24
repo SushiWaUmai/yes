@@ -23,6 +23,10 @@ namespace yes
 
     void Application::Terminate()
     {
+    }
+
+    Application::~Application()
+    {
         glfwTerminate();
     }
 }
