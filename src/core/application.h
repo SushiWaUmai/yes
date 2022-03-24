@@ -5,13 +5,17 @@ namespace yes
     class Application
     {
     public:
-        virtual void Init();
+        void Init();
+        void Init(const char *title, int width, int height);
         void Run();
-        virtual void Update();
-        virtual void Terminate();
 
     protected:
-        ~Application(); 
+        ~Application();
+
+        void CreateWindow(const char *title, int width, int height);
+
+        virtual void Start();
+        virtual void Update();
 
         Window window;
         Renderer renderer;

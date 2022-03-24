@@ -4,8 +4,18 @@ namespace yes
 {
     void Application::Init()
     {
-        window.Init("Hello World", 800, 600);
+        Init("Yes", 1280, 720);
+    }
+
+    void Application::Init(const char *title, int width, int height)
+    {
+        window.Init(title, width, height);
         renderer.Init();
+        Start();
+    }
+
+    void Application::Start()
+    {
     }
 
     void Application::Run()
@@ -19,10 +29,6 @@ namespace yes
     void Application::Update()
     {
         window.Run();
-    }
-
-    void Application::Terminate()
-    {
     }
 
     Application::~Application()
