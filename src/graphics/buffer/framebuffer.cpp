@@ -28,6 +28,15 @@ namespace yes
         glDeleteFramebuffers(1, &id);
     }
 
+    void FrameBuffer::AttachTexture(Ref<Texture> texture)
+    {
+        Bind();
+        texture->Bind();
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture->GetID(), 0);
+        texture->Unbind();
+        Unbind();
+    }
+
     void FrameBuffer::Bind() const
     {
         // assert that the framebuffer is complete

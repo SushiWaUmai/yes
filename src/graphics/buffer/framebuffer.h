@@ -13,6 +13,8 @@ namespace yes
         void Init();
         void Delete() const;
 
+        void AttachTexture(Ref<Texture> texture);
+
         void Bind() const;
         void Unbind() const;
 
