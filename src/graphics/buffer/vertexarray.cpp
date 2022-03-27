@@ -21,7 +21,6 @@ namespace yes
     void VertexArray::Init()
     {
         glGenVertexArrays(1, &id);
-        Bind();
     }
 
     void VertexArray::Delete() const
@@ -32,6 +31,7 @@ namespace yes
     void VertexArray::Bind() const
     {
         glBindVertexArray(id);
+        indexBuffer->Bind();
     }
 
     void VertexArray::Unbind() const
@@ -62,16 +62,16 @@ namespace yes
                             (void *)0);
         glEnableVertexAttribArray(index);
         vb->Unbind();
+        Unbind();
     }
 
     void VertexArray::EnableAllVertexAttributes()
     {
         Bind();
+        indexBuffer->Bind();
         // Index and Buffer
         for (auto &vertexBuffer : vertexBuffers)
-        {
-            vertexBuffer.second->Bind();
             EnableVertexAttribute(vertexBuffer.first);
-        }
+        Unbind();
     }
 }

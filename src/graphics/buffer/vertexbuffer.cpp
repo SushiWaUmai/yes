@@ -25,6 +25,7 @@ namespace yes
 
         Bind();
         glBufferData(GL_ARRAY_BUFFER, count * ShaderDataTypeUtils::ShaderDataTypeToSize(type), data, usage);
+        Unbind();
     }
 
     void VertexBuffer::Delete() const

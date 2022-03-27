@@ -25,6 +25,7 @@ namespace yes
 
         Bind();
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * ShaderDataTypeUtils::ShaderDataTypeToSize(type), data, usage);
+        Unbind();
     }
 
     void IndexBuffer::Delete() const

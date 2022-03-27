@@ -12,6 +12,11 @@ namespace yes
         Init(path);
     }
 
+    Texture::Texture(int width, int height, int channels, void *data)
+    {
+        Init(width, height, channels, data);
+    }
+
     Texture::~Texture()
     {
         Delete();
@@ -22,21 +27,61 @@ namespace yes
         return CreateRef<Texture>(path);
     }
 
-    void Texture::Init(const char *path)
+    Ref<Texture> Texture::Create(int width, int height, int channels, void *data)
+    {
+        return CreateRef<Texture>(width, height, channels, data);
+    }
+
+    void Texture::Init(int width, int height, int channels, void *data)
     {
         // generate texture
         glGenTextures(1, &id);
         Bind();
 
+        GLint internalFormat;
+        GLenum format;
+
+        switch (channels)
+        {
+        case 1:
+            internalFormat = GL_RED;
+            format = GL_RED;
+            break;
+        case 2:
+            internalFormat = GL_RG;
+            format = GL_RG;
+            break;
+        case 3:
+            internalFormat = GL_RGB;
+            format = GL_RGB;
+            break;
+        case 4:
+            internalFormat = GL_RGBA;
+            format = GL_RGBA;
+            break;
+        default:
+            assert(false);
+            break;
+        }
+
+        glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        Unbind();
+    }
+
+    void Texture::Init(const char *path)
+    {
         // Get the image from path
         unsigned char *data = stbi_load(path, &width, &height, &channels, 0);
 
         // Assert that the image was loaded successfully
         assert(data);
 
-        // TODO: Add support for more formats
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
+        Init(width, height, channels, data);
 
         // Free the image
         stbi_image_free(data);

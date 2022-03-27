@@ -27,7 +27,6 @@ namespace yes
         GLuint fragID = glCreateShader(GL_FRAGMENT_SHADER);
         Compile(fragID, fragPath);
         Link(vertID, fragID);
-        Use();
     }
 
     void Shader::Delete() const
