@@ -1,11 +1,13 @@
-#include "../core.h"
+#include "core.h"
 #include <iostream>
+#include <cassert>
+#include <stdlib.h>
 
 namespace yes
 {
-    Shader::Shader(const char *vertPath, const char *fragPath)
+    Shader::Shader()
     {
-        Init(vertPath, fragPath);
+        Init();
     }
 
     Shader::~Shader()
@@ -13,20 +15,28 @@ namespace yes
         Delete();
     }
 
-    Ref<Shader> Shader::Create(const char *vertPath, const char *fragPath)
+    Ref<Shader> Shader::Create()
     {
-        return CreateRef<Shader>(vertPath, fragPath);
+        return CreateRef<Shader>();
     }
 
-    void Shader::Init(const char *vertPath, const char *fragPath)
+    void Shader::Init()
     {
         id = glCreateProgram();
+    }
 
-        GLuint vertID = glCreateShader(GL_VERTEX_SHADER);
-        Compile(vertID, vertPath);
-        GLuint fragID = glCreateShader(GL_FRAGMENT_SHADER);
-        Compile(fragID, fragPath);
-        Link(vertID, fragID);
+    void Shader::Load(const char *vertPath, const char *fragPath)
+    {
+        Ref<ShaderSource> vertSource = ShaderSource::Create(GL_VERTEX_SHADER);
+        Ref<ShaderSource> fragSource = ShaderSource::Create(GL_FRAGMENT_SHADER);
+
+        vertSource->Load(vertPath, GL_VERTEX_SHADER);
+        fragSource->Load(fragPath, GL_FRAGMENT_SHADER);
+
+        AddSource(vertSource);
+        AddSource(fragSource);
+
+        Link();
     }
 
     void Shader::Delete() const
@@ -44,6 +54,58 @@ namespace yes
         glUseProgram(0);
     }
 
+    void Shader::AddSource(Ref<ShaderSource> source)
+    {
+        glAttachShader(id, source->GetID());
+
+        sources.push_back(source);
+    }
+
+    void Shader::RemoveSource(Ref<ShaderSource> source)
+    {
+        glDetachShader(id, source->GetID());
+
+        for (auto it = sources.begin(); it != sources.end(); ++it)
+        {
+            if (*it == source)
+            {
+                sources.erase(it);
+                break;
+            }
+        }
+    }
+
+    bool Shader::Link()
+    {
+        glLinkProgram(id);
+
+        GLint success;
+        glGetProgramiv(id, GL_LINK_STATUS, &success);
+
+        // For now
+        assert(success);
+        if (!success)
+        {
+            GLint length;
+            glGetProgramiv(id, GL_INFO_LOG_LENGTH, &length);
+            char *message = (char *)malloc(length * sizeof(char));
+            glGetProgramInfoLog(id, length, &length, message);
+
+            std::cout << "Failed to link shader program" << std::endl
+                      << message << std::endl;
+            free(message);
+            return false;
+        }
+
+        return true;
+    }
+
+    GLint Shader::GetUniformLocation(const char *name)
+    {
+        Use();
+        return glGetUniformLocation(id, name);
+    }
+
     void Shader::SetUniformV1F(const char *name, float value) { glUniform1f(GetUniformLocation(name), value); }
     void Shader::SetUniformV2F(const char *name, glm::vec2 value) { glUniform2fv(GetUniformLocation(name), 1, &value[0]); }
     void Shader::SetUniformV3F(const char *name, glm::vec3 value) { glUniform3fv(GetUniformLocation(name), 1, &value[0]); }
@@ -59,71 +121,4 @@ namespace yes
     void Shader::SetUniformM3F(const char *name, glm::mat3 value) { glUniformMatrix3fv(GetUniformLocation(name), 1, GL_FALSE, &value[0][0]); }
     void Shader::SetUniformM4F(const char *name, glm::mat4 value) { glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &value[0][0]); }
     void Shader::SetUniformBOOL(const char *name, bool value) { glUniform1i(GetUniformLocation(name), (int)value); }
-
-    bool Shader::Compile(GLuint &shaderID, const char *path)
-    {
-        const char *source = load_file(path);
-
-        if (!source)
-        {
-            std::cout << "Failed to load shader: " << path << std::endl;
-            return false;
-        }
-
-        glShaderSource(shaderID, 1, &source, NULL);
-        glCompileShader(shaderID);
-
-        GLint result;
-        glGetShaderiv(shaderID, GL_COMPILE_STATUS, &result);
-
-        if (result == GL_FALSE)
-        {
-            GLint length;
-            glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &length);
-            char *message = (char *)malloc(length * sizeof(char));
-            glGetShaderInfoLog(shaderID, length, &length, message);
-
-            std::cout << "Failed to compile vertex shader" << std::endl
-                      << message << std::endl;
-            free(message);
-            return false;
-        }
-
-        return true;
-    }
-
-    bool Shader::Link(GLuint vertID, GLuint fragID)
-    {
-        glAttachShader(id, vertID);
-        glAttachShader(id, fragID);
-
-        glLinkProgram(id);
-
-        GLint success;
-        glGetProgramiv(id, GL_LINK_STATUS, &success);
-
-        if (success == GL_FALSE)
-        {
-            GLint length;
-            glGetProgramiv(id, GL_INFO_LOG_LENGTH, &length);
-            char *message = (char *)malloc(length * sizeof(char));
-            glGetProgramInfoLog(id, length, &length, message);
-
-            std::cout << "Failed to link shader program" << std::endl
-                      << message << std::endl;
-            free(message);
-            return false;
-        }
-
-        glDeleteShader(vertID);
-        glDeleteShader(fragID);
-
-        return true;
-    }
-
-    GLint Shader::GetUniformLocation(const char *name)
-    {
-        Use();
-        return glGetUniformLocation(id, name);
-    }
 }

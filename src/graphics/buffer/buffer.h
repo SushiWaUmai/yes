@@ -1,9 +1,8 @@
 #pragma once
-#include "../../core.h"
 
 namespace yes
 {
-    template<GLuint BufferType>
+    template <GLuint BufferType>
     class Buffer
     {
     public:
@@ -23,6 +22,7 @@ namespace yes
         inline GLuint GetCount() const { return count; }
         inline ShaderDataType GetType() const { return dataType; }
 
+        explicit operator GLuint() const { return id; }
     private:
         GLuint id;
         GLsizei count;

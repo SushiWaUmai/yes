@@ -28,6 +28,8 @@ add_library(${PROJECT_NAME} STATIC
     "src/graphics/shadertypes.cpp"
     "src/graphics/shader.h"
     "src/graphics/shader.cpp"
+    "src/graphics/shadersource.h"
+    "src/graphics/shadersource.cpp"
     "src/graphics/renderer.h"
     "src/graphics/renderer.cpp"
     "src/graphics/texture.h"

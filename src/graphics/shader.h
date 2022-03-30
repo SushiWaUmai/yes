@@ -1,22 +1,28 @@
 #pragma once
-#include "../core.h"
+#include <vector>
 
 namespace yes
 {
     class Shader
     {
     public:
-        Shader() = default;
-        Shader(const char *vertPath, const char *fragPath);
+        Shader();
         ~Shader();
 
-        static Ref<Shader> Create(const char *vertPath, const char * fragPath);
+        static Ref<Shader> Create();
 
-        void Init(const char *vertPath, const char *fragPath);
+        void Init();
+        void Load(const char *vertPath, const char *fragPath);
         void Delete() const;
 
         void Use() const;
         void Unuse() const;
+
+        void AddSource(Ref<ShaderSource> source);
+        void RemoveSource(Ref<ShaderSource> source);
+        bool Link();
+
+        GLint GetUniformLocation(const char *name);
 
         // Uniforms
         void SetUniformV1F (const char *name, float value);
@@ -38,10 +44,6 @@ namespace yes
         inline GLuint GetID() const { return id; }
     private:
         GLuint id;
-
-        bool Compile(GLuint &shader, const char *path);
-        bool Link(GLuint vertID, GLuint fragID);
-
-        GLint GetUniformLocation(const char *name);
+        std::vector<Ref<ShaderSource>> sources;
     };
 } // namespace yes
