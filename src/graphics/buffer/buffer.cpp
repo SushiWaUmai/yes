@@ -2,26 +2,26 @@
 
 namespace yes
 {
-    template <typename T, GLuint BufferType>
-    Buffer<T, BufferType>::Buffer(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
+    template <GLuint BufferType>
+    Buffer<BufferType>::Buffer(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
     {
         Init(count, type, data, usage);
     }
 
-    template <typename T, GLuint BufferType>
-    Buffer<T, BufferType>::~Buffer()
+    template <GLuint BufferType>
+    Buffer<BufferType>::~Buffer()
     {
         Delete();
     }
 
-    template <typename T, GLuint BufferType>
-    Ref<T> Buffer<T, BufferType>::Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
+    template <GLuint BufferType>
+    Ref<Buffer<BufferType>> Buffer<BufferType>::Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
     {
-        return CreateRef<T>(count, type, data, usage);
+        return CreateRef<Buffer<BufferType>>(count, type, data, usage);
     }
 
-    template <typename T, GLuint BufferType>
-    void Buffer<T, BufferType>::Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
+    template <GLuint BufferType>
+    void Buffer<BufferType>::Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage)
     {
         glGenBuffers(1, &id);
         this->count = count;
@@ -32,20 +32,20 @@ namespace yes
         Unbind();
     }
 
-    template <typename T, GLuint BufferType>
-    void Buffer<T, BufferType>::Delete() const
+    template <GLuint BufferType>
+    void Buffer<BufferType>::Delete() const
     {
         glDeleteBuffers(1, &id);
     }
 
-    template <typename T, GLuint BufferType>
-    void Buffer<T, BufferType>::Bind() const
+    template <GLuint BufferType>
+    void Buffer<BufferType>::Bind() const
     {
         glBindBuffer(BufferType, id);
     }
 
-    template <typename T, GLuint BufferType>
-    void Buffer<T, BufferType>::Unbind() const
+    template <GLuint BufferType>
+    void Buffer<BufferType>::Unbind() const
     {
         glBindBuffer(BufferType, 0);
     }

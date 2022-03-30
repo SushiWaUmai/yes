@@ -3,7 +3,7 @@
 
 namespace yes
 {
-    template<typename T, GLuint BufferType>
+    template<GLuint BufferType>
     class Buffer
     {
     public:
@@ -11,7 +11,7 @@ namespace yes
         Buffer(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
         ~Buffer();
 
-        static Ref<T> Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
+        static Ref<Buffer<BufferType>> Create(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
 
         void Init(GLsizei count, ShaderDataType type, const void *data, GLenum usage);
         void Delete() const;
