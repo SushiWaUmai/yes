@@ -10,6 +10,7 @@
 
 #include "graphics/texture.h"
 #include "graphics/shadertypes.h"
+#include "graphics/buffer/buffer.h"
 #include "graphics/buffer/vertexbuffer.h"
 #include "graphics/buffer/indexbuffer.h"
 #include "graphics/buffer/vertexarray.h"

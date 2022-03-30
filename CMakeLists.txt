@@ -14,6 +14,8 @@ add_library(${PROJECT_NAME} STATIC
     "src/core/application.cpp"
     "src/core/window.h"
     "src/core/window.cpp"
+    "src/graphics/buffer/buffer.h"
+    "src/graphics/buffer/buffer.cpp"
     "src/graphics/buffer/indexbuffer.h"
     "src/graphics/buffer/indexbuffer.cpp"
     "src/graphics/buffer/framebuffer.h"
