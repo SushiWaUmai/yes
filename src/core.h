@@ -15,10 +15,10 @@
 #include "graphics/shader/shaderdata.h"
 #include "graphics/shader/shadersource.h"
 #include "graphics/shader/shader.h"
+#include "graphics/shader/shadertypes.h"
 
 #include "graphics/buffer/buffer.h"
-#include "graphics/buffer/vertexbuffer.h"
-#include "graphics/buffer/indexbuffer.h"
+#include "graphics/buffer/buffertypes.h"
 #include "graphics/buffer/vertexarray.h"
 #include "graphics/buffer/framebuffer.h"
 

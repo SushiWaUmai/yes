@@ -2,22 +2,24 @@
 
 namespace yes
 {
+    template <GLenum ShaderType>
     class ShaderSource
     {
     public:
-        ShaderSource(GLenum type);
-        ShaderSource(const char *src, GLenum type);
+        ShaderSource();
+        ShaderSource(const char *src);
         ~ShaderSource();
 
-        static Ref<ShaderSource> Create(GLenum type);
+        static Ref<ShaderSource> Create();
 
-        void Init(GLenum type);
-        void Init(const char *src, GLenum type);
-        void Load(const char *path, GLenum type);
+        void Init();
+        void Init(const char *src);
+        void Load(const char *path);
         void Delete();
 
         inline GLuint GetID() const { return id; }
 
+        explicit operator GLuint() const { return id; }
     private:
         bool Compile(const char *src);
 

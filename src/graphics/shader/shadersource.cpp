@@ -5,50 +5,59 @@
 
 namespace yes
 {
-    ShaderSource::ShaderSource(GLenum type)
+    template <GLenum ShaderType>
+    ShaderSource<ShaderType>::ShaderSource()
     {
-        Init(type);
+        Init();
     }
 
-    ShaderSource::ShaderSource(const char *src, GLenum type)
+    template <GLenum ShaderType>
+    ShaderSource<ShaderType>::ShaderSource(const char *src)
     {
-        Init(src, type);
+        Init(src);
     }
 
-    ShaderSource::~ShaderSource()
+    template <GLenum ShaderType>
+    ShaderSource<ShaderType>::~ShaderSource()
     {
         Delete();
     }
 
-    Ref<ShaderSource> ShaderSource::Create(GLenum type)
+    template <GLenum ShaderType>
+    Ref<ShaderSource<ShaderType>> ShaderSource<ShaderType>::Create()
     {
-        return CreateRef<ShaderSource>(type);
+        return CreateRef<ShaderSource>();
     }
 
-    void ShaderSource::Init(GLenum type)
+    template <GLenum ShaderType>
+    void ShaderSource<ShaderType>::Init()
     {
-        id = glCreateShader(type);
+        id = glCreateShader(ShaderType);
     }
 
-    void ShaderSource::Init(const char *src, GLenum type)
+    template <GLenum ShaderType>
+    void ShaderSource<ShaderType>::Init(const char *src)
     {
-        Init(type);
+        Init();
         Compile(src);
     }
 
-    void ShaderSource::Load(const char *path, GLenum type)
+    template <GLenum ShaderType>
+    void ShaderSource<ShaderType>::Load(const char *path)
     {
-        const char *source = load_file(path);
-        Init(source, type);
-        free((char *)source);
+        const char *src = load_file(path);
+        Init(src);
+        free((char *)src);
     }
 
-    void ShaderSource::Delete()
+    template <GLenum ShaderType>
+    void ShaderSource<ShaderType>::Delete()
     {
         glDeleteShader(id);
     }
 
-    bool ShaderSource::Compile(const char *src)
+    template <GLenum ShaderType>
+    bool ShaderSource<ShaderType>::Compile(const char *src)
     {
         glShaderSource(id, 1, &src, NULL);
         glCompileShader(id);

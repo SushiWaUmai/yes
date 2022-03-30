@@ -2,7 +2,7 @@
 
 namespace yes
 {
-    template <GLuint BufferType>
+    template <GLenum BufferType>
     class Buffer
     {
     public:

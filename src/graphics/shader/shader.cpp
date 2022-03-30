@@ -27,11 +27,11 @@ namespace yes
 
     void Shader::Load(const char *vertPath, const char *fragPath)
     {
-        Ref<ShaderSource> vertSource = ShaderSource::Create(GL_VERTEX_SHADER);
-        Ref<ShaderSource> fragSource = ShaderSource::Create(GL_FRAGMENT_SHADER);
+        Ref<VertexShader> vertSource = VertexShader::Create();
+        Ref<FragmentShader> fragSource = FragmentShader::Create();
 
-        vertSource->Load(vertPath, GL_VERTEX_SHADER);
-        fragSource->Load(fragPath, GL_FRAGMENT_SHADER);
+        vertSource->Load(vertPath);
+        fragSource->Load(fragPath);
 
         AddSource(vertSource);
         AddSource(fragSource);
@@ -54,25 +54,16 @@ namespace yes
         glUseProgram(0);
     }
 
-    void Shader::AddSource(Ref<ShaderSource> source)
+    template <GLenum ShaderType>
+    void Shader::AddSource(Ref<ShaderSource<ShaderType>> source)
     {
         glAttachShader(id, source->GetID());
-
-        sources.push_back(source);
     }
 
-    void Shader::RemoveSource(Ref<ShaderSource> source)
+    template <GLenum ShaderType>
+    void Shader::RemoveSource(Ref<ShaderSource<ShaderType>> source)
     {
         glDetachShader(id, source->GetID());
-
-        for (auto it = sources.begin(); it != sources.end(); ++it)
-        {
-            if (*it == source)
-            {
-                sources.erase(it);
-                break;
-            }
-        }
     }
 
     bool Shader::Link()
