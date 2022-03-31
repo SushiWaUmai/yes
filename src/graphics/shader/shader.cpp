@@ -1,7 +1,7 @@
 #include "core.h"
-#include <iostream>
 #include <cassert>
 #include <stdlib.h>
+#include <stdio.h>
 
 namespace yes
 {
@@ -81,9 +81,8 @@ namespace yes
             glGetProgramiv(id, GL_INFO_LOG_LENGTH, &length);
             char *message = (char *)malloc(length * sizeof(char));
             glGetProgramInfoLog(id, length, &length, message);
+            fprintf(stderr, "[ERROR] Shader: Failed to link shader program:\n%s\n", message);
 
-            std::cout << "Failed to link shader program" << std::endl
-                      << message << std::endl;
             free(message);
             return false;
         }

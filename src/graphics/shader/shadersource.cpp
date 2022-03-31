@@ -1,5 +1,4 @@
 #include "core.h"
-#include <iostream>
 #include <cassert>
 #include <stdlib.h>
 
@@ -74,8 +73,7 @@ namespace yes
             char *message = (char *)malloc(length * sizeof(char));
             glGetShaderInfoLog(id, length, &length, message);
 
-            std::cout << "Failed to compile vertex shader" << std::endl
-                      << message << std::endl;
+            fprintf(stderr, "[ERROR] Shader: Failed to compile shader:\n %s\n", message);
             free(message);
             return false;
         }

@@ -1,4 +1,4 @@
-#include "../core.h"
+#include "core.h"
 
 namespace yes
 {
@@ -11,6 +11,7 @@ namespace yes
     {
         window.Init(title, width, height);
         renderer.Init();
+
         Start();
     }
 
