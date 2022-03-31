@@ -1,10 +1,11 @@
 #include "core.h"
+#include <cassert>
 
 namespace yes
 {
     void Renderer::Init() const
     {
-        gladLoadGL();
+        assert(gladLoadGL());
     }
 
     void Renderer::Submit(const Ref<VertexArray> &vertexArray) const
