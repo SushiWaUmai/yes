@@ -9,6 +9,9 @@ namespace yes
 
     void Application::Init(const char *title, int width, int height)
     {
+        Logger::Create(CORE_LOGGER);
+        Logger::SetLevel(CORE_LOGGER, spdlog::level::trace);
+        
         window.Init(title, width, height);
         renderer.Init();
 

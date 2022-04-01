@@ -46,6 +46,6 @@ namespace yes
 
     void Window::error_callback(int error, const char *description)
     {
-        fprintf(stderr, "[ERROR] GLFW: %s\n", description);
+        Logger::Error(CORE_LOGGER, "[GLFW] %s", description);
     }
 }

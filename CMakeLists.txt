@@ -5,6 +5,7 @@ project(yes CXX)
 add_subdirectory("./deps/glad/")
 add_subdirectory("./deps/glfw/")
 add_subdirectory("./deps/glm/")
+add_subdirectory("./deps/spdlog/")
 
 add_library(${PROJECT_NAME} STATIC
     "include/yes/yes.h"
@@ -31,6 +32,8 @@ add_library(${PROJECT_NAME} STATIC
     "src/graphics/renderer.cpp"
     "src/graphics/texture.h"
     "src/graphics/texture.cpp"
+    "src/utils/log.h"
+    "src/utils/log.cpp"
     "src/utils/fileloader.h"
     "src/utils/fileloader.cpp"
 )
@@ -39,9 +42,10 @@ target_compile_options(${PROJECT_NAME} INTERFACE "-lglad" PRIVATE "-lglfw3")
 target_include_directories(${PROJECT_NAME}
     PRIVATE "./deps/glfw/include/"
     PRIVATE "./deps/glad/include/"
+    PRIVATE "./deps/spdlog/include/"
     PRIVATE "./deps/stb/"
     PRIVATE "./src/"
     PUBLIC  "./include/"
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC "glad" "glfw" "glm")
+target_link_libraries(${PROJECT_NAME} PUBLIC "glad" "glfw" "glm" "spdlog")

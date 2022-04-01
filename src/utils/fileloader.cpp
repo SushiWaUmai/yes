@@ -1,3 +1,4 @@
+#include "core.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +11,7 @@ namespace yes
 
         if (file == NULL)
         {
-            printf("Could not open file: %s\n", path);
+            Logger::Error("Could not open file: %s", path);
             return 0;
         }
 

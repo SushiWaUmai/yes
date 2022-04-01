@@ -4,7 +4,7 @@ namespace yes
 {
     namespace ShaderDataTypeUtils
     {
-        GLsizei ShaderDataTypeToSize(ShaderDataType type)
+        GLsizei ToSize(ShaderDataType type)
         {
             switch (type)
             {
@@ -50,7 +50,7 @@ namespace yes
             return 0;
         }
 
-        GLenum ShaderDataTypeToGLType(ShaderDataType type)
+        GLenum ToGLType(ShaderDataType type)
         {
             switch (type)
             {
@@ -96,7 +96,7 @@ namespace yes
             return GL_NONE;
         }
 
-        GLuint ShaderDataTypeToComponentCount(ShaderDataType type)
+        GLuint ToComponentCount(ShaderDataType type)
         {
             switch (type)
             {

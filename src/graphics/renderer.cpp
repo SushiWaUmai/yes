@@ -9,7 +9,10 @@ namespace yes
         assert(gladLoadGL());
 
         // Print OpenGL version
-        fprintf(stdout, "[INFO] OpenGL version: %s\n", glGetString(GL_VERSION));
+        Logger::Info(CORE_LOGGER, "[OpenGL] Version: {}", (const char *)glGetString(GL_VERSION));
+        Logger::Info(CORE_LOGGER, "[OpenGL] Shading Language Version: {}", (const char *)glGetString(GL_SHADING_LANGUAGE_VERSION));
+        Logger::Info(CORE_LOGGER, "[OpenGL] Vendor: {}", (const char *)glGetString(GL_VENDOR));
+        Logger::Info(CORE_LOGGER, "[OpenGL] Renderer: {}", (const char *)glGetString(GL_RENDERER));
 
         glDebugMessageCallback(debug_callback, nullptr);
     }
@@ -31,16 +34,16 @@ namespace yes
         switch (severity)
         {
         case GL_DEBUG_SEVERITY_HIGH:
-            fprintf(stderr, "[ERROR] %s\n", message);
+            Logger::Error(CORE_LOGGER, "[OpenGL] {}", message);
             break;
         case GL_DEBUG_SEVERITY_MEDIUM:
-            fprintf(stderr, "[WARN] %s\n", message);
+            Logger::Warn(CORE_LOGGER, "[OpenGL] {}", message);
             break;
         case GL_DEBUG_SEVERITY_LOW:
-            fprintf(stderr, "[INFO] %s\n", message);
+            Logger::Info(CORE_LOGGER, "[OpenGL] {}", message);
             break;
         case GL_DEBUG_SEVERITY_NOTIFICATION:
-            fprintf(stdout, "[TRACE] %s\n", message);
+            Logger::Trace(CORE_LOGGER, "[OpenGL] {}", message);
             break;
         }
     }

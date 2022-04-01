@@ -54,10 +54,10 @@ namespace yes
         VertexBuffer *vb = vertexBuffers[index].get();
         vb->Bind();
         glVertexAttribPointer(index,
-                            ShaderDataTypeUtils::ShaderDataTypeToComponentCount(vb->GetType()),
-                            ShaderDataTypeUtils::ShaderDataTypeToGLType(vb->GetType()),
+                            ShaderDataTypeUtils::ToComponentCount(vb->GetType()),
+                            ShaderDataTypeUtils::ToGLType(vb->GetType()),
                             GL_FALSE,
-                            ShaderDataTypeUtils::ShaderDataTypeToSize(vb->GetType()),
+                            ShaderDataTypeUtils::ToSize(vb->GetType()),
                             (void *)0);
         glEnableVertexAttribArray(index);
         vb->Unbind();

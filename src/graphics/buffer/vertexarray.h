@@ -26,12 +26,12 @@ namespace yes
         inline GLsizei GetIndexCount() const
         {
             return indexBuffer->GetCount() *
-                   ShaderDataTypeUtils::ShaderDataTypeToComponentCount(indexBuffer->GetType());
+                   ShaderDataTypeUtils::ToComponentCount(indexBuffer->GetType());
         }
         
         inline GLenum GetIndexType() const
         {
-            return ShaderDataTypeUtils::ShaderDataTypeToGLType(indexBuffer->GetType());
+            return ShaderDataTypeUtils::ToGLType(indexBuffer->GetType());
         }
 
         inline GLuint GetID() const { return id; }

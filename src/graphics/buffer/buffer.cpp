@@ -28,7 +28,7 @@ namespace yes
         this->dataType = type;
 
         Bind();
-        glBufferData(BufferType, count * ShaderDataTypeUtils::ShaderDataTypeToSize(type), data, usage);
+        glBufferData(BufferType, count * ShaderDataTypeUtils::ToSize(type), data, usage);
         Unbind();
     }
 

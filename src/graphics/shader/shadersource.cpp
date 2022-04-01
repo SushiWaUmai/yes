@@ -73,7 +73,7 @@ namespace yes
             char *message = (char *)malloc(length * sizeof(char));
             glGetShaderInfoLog(id, length, &length, message);
 
-            fprintf(stderr, "[ERROR] Shader: Failed to compile shader:\n %s\n", message);
+            Logger::Error(CORE_LOGGER, "[Shader] Failed to compile shader:\n%s\n", message);
             free(message);
             return false;
         }

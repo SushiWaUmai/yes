@@ -5,9 +5,12 @@
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 #include "core/ref.h"
 
+#include "utils/log.h"
 #include "utils/fileloader.h"
 
 #include "graphics/texture.h"
