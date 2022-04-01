@@ -1,5 +1,4 @@
 #include "core.h"
-#include <cassert>
 
 namespace yes
 {
@@ -39,8 +38,13 @@ namespace yes
 
     void FrameBuffer::Bind() const
     {
-        // assert that the framebuffer is complete
-        assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+        // check that the framebuffer is complete
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        {
+            Logger::Error(CORE_LOGGER, "[OpenGL] Framebuffer is not complete");
+            return;
+        }
+
         glBindFramebuffer(GL_FRAMEBUFFER, id);
     }
 

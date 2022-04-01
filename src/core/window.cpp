@@ -1,5 +1,4 @@
 #include "core.h"
-#include <cassert>
 #include <stdio.h>
 
 namespace yes
@@ -8,7 +7,11 @@ namespace yes
 
     void Window::Init(const char *title, int width, int height)
     {
-        assert(glfwInit());
+        if (!glfwInit())
+        {
+            Logger::Error(CORE_LOGGER, "[GLFW] Failed to initialize GLFW");
+            return;
+        }
 
         glfwSetErrorCallback(error_callback);
 
@@ -23,7 +26,14 @@ namespace yes
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
         window = glfwCreateWindow(width, height, title, NULL, NULL);
-        assert(window);
+
+        if (!window)
+        {
+            Logger::Error(CORE_LOGGER, "[GLFW] Failed to create window");
+            glfwTerminate();
+            return;
+        }
+
         MakeCurrent();
     }
 
@@ -46,6 +56,6 @@ namespace yes
 
     void Window::error_callback(int error, const char *description)
     {
-        Logger::Error(CORE_LOGGER, "[GLFW] %s", description);
+        Logger::Error(CORE_LOGGER, "[GLFW] {}", description);
     }
 }

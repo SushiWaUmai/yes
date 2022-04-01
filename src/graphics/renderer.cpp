@@ -1,12 +1,15 @@
 #include "core.h"
-#include <cassert>
 #include <stdio.h>
 
 namespace yes
 {
     void Renderer::Init() const
     {
-        assert(gladLoadGL());
+        if (!gladLoadGL())
+        {
+            Logger::Error(CORE_LOGGER, "[OpenGL] Failed to initialize glad");
+            return;
+        }
 
         // Print OpenGL version
         Logger::Info(CORE_LOGGER, "[OpenGL] Version: {}", (const char *)glGetString(GL_VERSION));

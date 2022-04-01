@@ -1,6 +1,5 @@
 #include "core.h"
 #include "texture.h"
-#include <cassert>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
@@ -60,7 +59,7 @@ namespace yes
             format = GL_RGBA;
             break;
         default:
-            assert(false);
+            Logger::Error(CORE_LOGGER, "[Texture] Unsupported number of channels: {}", channels);
             break;
         }
 
