@@ -6,9 +6,11 @@ namespace yes
 {
     namespace Logger
     {
+        typedef spdlog::level::level_enum Level;
+
         void Create(const char *name);
         void Destroy(const char *name);
-        void SetLevel(const char *name, spdlog::level::level_enum level);
+        void SetLevel(const char *name, Level level);
         void SetFormat(const char *name, const char *fmt);
 
         template <typename... Args>

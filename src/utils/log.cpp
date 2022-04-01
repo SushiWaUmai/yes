@@ -20,7 +20,7 @@ namespace yes
             spdlog::drop(name);
         }
 
-        void SetLevel(const char *name, spdlog::level::level_enum level)
+        void SetLevel(const char *name, Level level)
         {
             spdlog::get(name)->set_level(level);
         }
