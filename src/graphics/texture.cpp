@@ -66,7 +66,7 @@ namespace yes
 
         glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
-        
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -78,8 +78,12 @@ namespace yes
         // Get the image from path
         unsigned char *data = stbi_load(path, &width, &height, &channels, 0);
 
-        // Assert that the image was loaded successfully
-        assert(data);
+        // Check if the image was loaded successfully
+        if (!data)
+        {
+            Logger::Error(CORE_LOGGER, "[IO] Failed to load image: {0}\n{1}", path, stbi_failure_reason());
+            return;
+        }
 
         Init(width, height, channels, data);
 
