@@ -1,7 +1,4 @@
 #include "core.h"
-#include <cassert>
-#include <stdlib.h>
-#include <stdio.h>
 
 namespace yes
 {
@@ -73,17 +70,15 @@ namespace yes
         GLint success;
         glGetProgramiv(id, GL_LINK_STATUS, &success);
 
-        // For now
-        assert(success);
         if (!success)
         {
             GLint length;
             glGetProgramiv(id, GL_INFO_LOG_LENGTH, &length);
-            char *message = (char *)malloc(length * sizeof(char));
+            char *message = new char[length];
             glGetProgramInfoLog(id, length, &length, message);
-            Logger::Error(CORE_LOGGER, "[Shader] Failed to link shader program:\n%s\n", message);
+            Logger::Error(CORE_LOGGER, "[Shader] Failed to link shader program:\n{}", message);
 
-            free(message);
+            delete[] message;
             return false;
         }
 

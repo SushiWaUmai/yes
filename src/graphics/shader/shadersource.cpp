@@ -1,6 +1,4 @@
 #include "core.h"
-#include <cassert>
-#include <stdlib.h>
 
 namespace yes
 {
@@ -64,17 +62,15 @@ namespace yes
         GLint result;
         glGetShaderiv(id, GL_COMPILE_STATUS, &result);
 
-        // For now
-        assert(result);
         if (!result)
         {
             GLint length;
             glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-            char *message = (char *)malloc(length * sizeof(char));
+            char *message = new char[length];
             glGetShaderInfoLog(id, length, &length, message);
+            Logger::Error(CORE_LOGGER, "[Shader] Failed to compile shader:\n{}", message);
 
-            Logger::Error(CORE_LOGGER, "[Shader] Failed to compile shader:\n%s\n", message);
-            free(message);
+            delete[] message;
             return false;
         }
 

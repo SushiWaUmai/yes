@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <cerrno>
 
 namespace yes
 {
@@ -9,9 +10,9 @@ namespace yes
     {
         FILE *file = fopen(path, "rb");
 
-        if (file == NULL)
+        if (!file)
         {
-            Logger::Error("Could not open file: %s", path);
+            Logger::Error(CORE_LOGGER, "[IO] Failed to open file: {0}\n{1}", path, strerror(errno));
             return 0;
         }
 
