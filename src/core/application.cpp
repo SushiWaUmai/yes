@@ -11,15 +11,14 @@ namespace yes
     {
         Logger::Create(CORE_LOGGER);
         Logger::SetLevel(CORE_LOGGER, Logger::Level::trace);
-        
-        window.Init(title, width, height);
-        renderer.Init();
 
-        Start();
+        Start(title, width, height);
     }
 
-    void Application::Start()
+    void Application::Start(const char *title, int width, int height)
     {
+        window.Init(title, width, height);
+        renderer.Init();
     }
 
     void Application::Run()

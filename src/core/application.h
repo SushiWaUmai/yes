@@ -6,13 +6,13 @@ namespace yes
     {
     public:
         void Init();
-        void Init(const char *title, int width, int height);
+        virtual void Init(const char *title, int width, int height);
         void Run();
 
     protected:
         ~Application();
 
-        virtual void Start();
+        virtual void Start(const char *title, int width, int height);
         virtual void Update();
 
         Window window;
