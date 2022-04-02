@@ -13,8 +13,11 @@ namespace yes
         static Ref<Texture> Create(int width, int height, int channels, void *data);
         static Ref<Texture> Create(const char *path);
 
+        static GLint GetColorFormat(int channels);
+
         void Init(const char *path);
         void Init(int width, int height, int channels, void *data);
+        void Resize(int width, int height);
         void Delete() const;
 
         void Bind() const;

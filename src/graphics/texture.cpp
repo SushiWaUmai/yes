@@ -31,39 +31,33 @@ namespace yes
         return CreateRef<Texture>(width, height, channels, data);
     }
 
+    GLint Texture::GetColorFormat(int channels)
+    {
+        switch (channels)
+        {
+        case 1:
+            return GL_RED;
+        case 2:
+            return GL_RG;
+        case 3:
+            return GL_RGB;
+        case 4:
+            return GL_RGBA;
+        default:
+            Logger::Error(CORE_LOGGER, "[Texture] Unsupported number of channels: {}", channels);
+            return 0;
+        }
+    }
+
     void Texture::Init(int width, int height, int channels, void *data)
     {
         // generate texture
         glGenTextures(1, &id);
         Bind();
 
-        GLint internalFormat;
-        GLenum format;
+        GLenum colorFormat = GetColorFormat(channels);
 
-        switch (channels)
-        {
-        case 1:
-            internalFormat = GL_RED;
-            format = GL_RED;
-            break;
-        case 2:
-            internalFormat = GL_RG;
-            format = GL_RG;
-            break;
-        case 3:
-            internalFormat = GL_RGB;
-            format = GL_RGB;
-            break;
-        case 4:
-            internalFormat = GL_RGBA;
-            format = GL_RGBA;
-            break;
-        default:
-            Logger::Error(CORE_LOGGER, "[Texture] Unsupported number of channels: {}", channels);
-            break;
-        }
-
-        glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, colorFormat, width, height, 0, colorFormat, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -88,6 +82,21 @@ namespace yes
 
         // Free the image
         stbi_image_free(data);
+    }
+
+    void Texture::Resize(int targetWidth, int targetHeight)
+    {
+        Bind();
+
+        GLint colorFormat = GetColorFormat(channels);
+
+        glTexImage2D(GL_TEXTURE_2D, 0, colorFormat, targetWidth, targetHeight, 0, colorFormat, GL_UNSIGNED_BYTE, nullptr);
+        glGenerateMipmap(GL_TEXTURE_2D);
+
+        width = targetWidth;
+        height = targetHeight;
+
+        Unbind();
     }
 
     void Texture::Delete() const
