@@ -63,6 +63,10 @@ namespace yes
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+        this->width = width;
+        this->height = height;
+        this->channels = channels;
+
         Unbind();
     }
 
@@ -84,17 +88,17 @@ namespace yes
         stbi_image_free(data);
     }
 
-    void Texture::Resize(int targetWidth, int targetHeight)
+    void Texture::Resize(int width, int height)
     {
         Bind();
 
         GLint colorFormat = GetColorFormat(channels);
 
-        glTexImage2D(GL_TEXTURE_2D, 0, colorFormat, targetWidth, targetHeight, 0, colorFormat, GL_UNSIGNED_BYTE, nullptr);
+        glTexImage2D(GL_TEXTURE_2D, 0, colorFormat, width, height, 0, colorFormat, GL_UNSIGNED_BYTE, nullptr);
         glGenerateMipmap(GL_TEXTURE_2D);
 
-        width = targetWidth;
-        height = targetHeight;
+        this->width = width;
+        this->height = height;
 
         Unbind();
     }

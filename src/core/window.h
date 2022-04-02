@@ -17,6 +17,17 @@ namespace yes
 
         inline bool shouldClose() const { return glfwWindowShouldClose(window); }
 
+        Event<void(int, const char *)> OnErrorEvent;
+        Event<void(int, int)> OnRepositionEvent;
+        Event<void(int, int)> OnResizeEvent;
+        Event<void()> OnCloseEvent;
+        Event<void()> OnRefreshEvent;
+        Event<void(bool)> OnFocusEvent;
+        Event<void(bool)> OnIconifyEvent;
+        Event<void(bool)> OnMaximizeEvent;
+        Event<void(int, int)> OnFramebufferResizeEvent;
+        Event<void(float, float)> OnContentRescaleEvent;
+
     protected:
         GLFWwindow *window;
         int width, height;

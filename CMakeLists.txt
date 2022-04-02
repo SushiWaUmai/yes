@@ -34,6 +34,7 @@ add_library(${PROJECT_NAME} STATIC
     "src/graphics/texture.cpp"
     "src/utils/log.h"
     "src/utils/log.cpp"
+    "src/utils/event.h"
     "src/utils/fileloader.h"
     "src/utils/fileloader.cpp"
 )

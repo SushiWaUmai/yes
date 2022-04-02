@@ -2,7 +2,7 @@
 
 namespace yes
 {
-    void Window::Init(const char *targetTitle, int targetWidth, int targetHeight)
+    void Window::Init(const char *title, int width, int height)
     {
         if (!glfwInit())
         {
@@ -22,7 +22,7 @@ namespace yes
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-        window = glfwCreateWindow(targetWidth, targetHeight, targetTitle, NULL, NULL);
+        window = glfwCreateWindow(width, height, title, NULL, NULL);
 
         if (!window)
         {
@@ -33,9 +33,9 @@ namespace yes
 
         glfwMakeContextCurrent(window);
 
-        width = targetWidth;
-        height = targetHeight;
-        title = targetTitle;
+        this->width = width;
+        this->height = height;
+        this->title = title;
 
         glfwSetWindowUserPointer(window, this);
 
@@ -89,53 +89,63 @@ namespace yes
     void Window::OnError(int error, const char *description)
     {
         Logger::Error(CORE_LOGGER, "[GLFW] Window: \"{}\"\n{}", title, description);
+        OnErrorEvent(error, description);
     }
 
     void Window::OnReposition(int x, int y)
     {
         Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" Position: ({}, {})", title, x, y);
+        OnRepositionEvent(x, y);
     }
 
-    void Window::OnResize(int targetWidth, int targetHeight)
+    void Window::OnResize(int width, int height)
     {
-        width = targetWidth;
-        height = targetHeight;
-
-        Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" Size: {}x{}", title, targetWidth, targetHeight);
+        this->width = width;
+        this->height = height;
+        OnResizeEvent(width, height);
+        
+        Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" Size: {}x{}", title, width, height);
     }
 
     void Window::OnClose()
     {
+        OnCloseEvent();
         Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" closed", title);
     }
 
     void Window::OnRefresh()
     {
+        OnRefreshEvent();
         Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" Refresh", title);
     }
 
     void Window::OnFocus(bool focus)
     {
+        OnFocusEvent(focus);
         Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" focus: {}", title, focus);
     }
 
     void Window::OnIconify(bool iconified)
     {
+        OnIconifyEvent(iconified);
         Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" iconified: {}", title, iconified);
     }
 
     void Window::OnMaximize(bool maximized)
     {
+        OnMaximizeEvent(maximized);
         Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" maximized: {}", title, maximized);
     }
 
     void Window::OnFramebufferResize(int width, int height)
     {
+        OnFramebufferResizeEvent(width, height);
         Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" framebuffer resize: {}x{}", title, width, height);
     }
 
     void Window::OnContentRescale(float xscale, float yscale)
     {
+        OnContentRescaleEvent(xscale, yscale);
         Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" content rescale: {}x{}", title, xscale, yscale);
     }
 

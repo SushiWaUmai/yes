@@ -12,6 +12,7 @@
 
 #include "utils/log.h"
 #include "utils/fileloader.h"
+#include "utils/event.h"
 
 #include "graphics/texture.h"
 
