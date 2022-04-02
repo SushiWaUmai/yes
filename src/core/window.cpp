@@ -50,7 +50,7 @@ namespace yes
         glfwSetWindowContentScaleCallback(window, content_scale_callback);
     }
 
-    void Window::Run()
+    void Window::Update()
     {
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -64,6 +64,12 @@ namespace yes
     void Window::Close()
     {
         glfwSetWindowShouldClose(window, GL_TRUE);
+    }
+
+    void Window::ChangeTitle(const char *targetTitle)
+    {
+        glfwSetWindowTitle(window, targetTitle);
+        title = targetTitle;
     }
 
     Window *Window::GetWindow(GLFWwindow *window)
@@ -90,9 +96,12 @@ namespace yes
         Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" Position: ({}, {})", title, x, y);
     }
 
-    void Window::OnResize(int width, int height)
+    void Window::OnResize(int targetWidth, int targetHeight)
     {
-        Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" Size: {}x{}", title, width, height);
+        width = targetWidth;
+        height = targetHeight;
+
+        Logger::Trace(CORE_LOGGER, "[GLFW] Window: \"{}\" Size: {}x{}", title, targetWidth, targetHeight);
     }
 
     void Window::OnClose()

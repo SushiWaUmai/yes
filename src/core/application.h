@@ -12,8 +12,6 @@ namespace yes
     protected:
         ~Application();
 
-        void CreateWindow(const char *title, int width, int height);
-
         virtual void Start();
         virtual void Update();
 

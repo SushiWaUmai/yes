@@ -32,7 +32,7 @@ namespace yes
 
     void Application::Update()
     {
-        window.Run();
+        window.Update();
     }
 
     Application::~Application()

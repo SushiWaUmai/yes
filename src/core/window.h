@@ -6,9 +6,11 @@ namespace yes
     {
     public:
         void Init(const char *title, int width, int height);
-        void Run();
+        void Update();
         void Destroy();
         void Close();
+
+        void ChangeTitle(const char *title);
 
         static Window *GetWindow(GLFWwindow *window);
         static Window *GetCurrent();
