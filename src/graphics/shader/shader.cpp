@@ -85,9 +85,23 @@ namespace yes
         return true;
     }
 
+    void Shader::DispatchCompute()
+    {
+        int x, y, z;
+        GetMaxComputeWorkGroupSize(&x, &y, &z);
+        DispatchCompute(x, y, z);
+    }
+
     void Shader::DispatchCompute(int x, int y, int z)
     {
         glDispatchCompute(x, y, z);
+    }
+
+    void Shader::GetMaxComputeWorkGroupSize(int *x, int *y, int *z)
+    {
+        glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 0, x);
+        glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 1, y);
+        glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 2, z);
     }
 
     GLint Shader::GetUniformLocation(const char *name)

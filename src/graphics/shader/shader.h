@@ -26,7 +26,9 @@ namespace yes
 
         bool Link();
 
+        void DispatchCompute();
         void DispatchCompute(int x, int y, int z);
+        void GetMaxComputeWorkGroupSize(int *x, int *y, int *z);
 
         GLint GetUniformLocation(const char *name);
 
