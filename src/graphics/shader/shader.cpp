@@ -85,6 +85,11 @@ namespace yes
         return true;
     }
 
+    void Shader::DispatchCompute(int x, int y, int z)
+    {
+        glDispatchCompute(x, y, z);
+    }
+
     GLint Shader::GetUniformLocation(const char *name)
     {
         Use();

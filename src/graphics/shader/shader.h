@@ -26,6 +26,8 @@ namespace yes
 
         bool Link();
 
+        void DispatchCompute(int x, int y, int z);
+
         GLint GetUniformLocation(const char *name);
 
         // Uniforms
