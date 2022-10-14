@@ -1,4 +1,7 @@
 #pragma once
+#include <GLFW/glfw3.h>
+#include "core/ref.h"
+#include "graphics/shader/shaderdata.h"
 
 namespace yes
 {

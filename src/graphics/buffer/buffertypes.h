@@ -1,4 +1,5 @@
 #pragma once
+#include "graphics/buffer/buffer.h"
 
 namespace yes
 {

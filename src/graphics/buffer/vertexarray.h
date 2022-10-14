@@ -1,5 +1,8 @@
 #pragma once
+#include <GLFW/glfw3.h>
 #include <unordered_map>
+#include "core/ref.h"
+#include "graphics/buffer/buffertypes.h"
 
 namespace yes
 {

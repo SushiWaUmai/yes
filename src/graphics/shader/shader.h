@@ -1,5 +1,9 @@
 #pragma once
 #include <vector>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include "core/ref.h"
+#include "graphics/shader/shadersource.h"
 
 namespace yes
 {

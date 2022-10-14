@@ -1,4 +1,5 @@
 #pragma once
+#include "graphics/shader/shadersource.h"
 
 namespace yes
 {

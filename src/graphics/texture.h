@@ -1,4 +1,6 @@
 #pragma once
+#include <GLFW/glfw3.h>
+#include "core/ref.h"
 
 namespace yes
 {

@@ -45,7 +45,7 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE "./deps/glad/include/"
     PRIVATE "./deps/spdlog/include/"
     PRIVATE "./deps/stb/"
-    PRIVATE "./src/"
+    PUBLIC "./src/"
     PUBLIC  "./include/"
 )
 

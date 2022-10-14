@@ -1,4 +1,6 @@
 #pragma once
+#include "core/window.h"
+#include "graphics/renderer.h"
 
 namespace yes {
 class Application {

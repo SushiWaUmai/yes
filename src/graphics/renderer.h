@@ -1,4 +1,6 @@
 #pragma once
+#include <GLFW/glfw3.h>
+#include "graphics/buffer/vertexarray.h"
 
 namespace yes
 {
